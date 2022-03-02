@@ -2,7 +2,7 @@ create table person
 
 ( 
 
-	person_id int primary key, 
+	person_id int identity(1,1) primary key , 
 
 	first_name varchar(25), 
 
@@ -22,7 +22,7 @@ create table address
 
 ( 
 
-	address_id int primary key, 
+	address_id int identity(1,1) primary key, 
 
 	state varchar(25), 
 
@@ -40,7 +40,7 @@ create table users
 
 ( 
 
-	user_id int primary key, 
+	user_id int identity(1,1) primary key, 
 
 	person_id int references person(person_id), 
 
@@ -54,7 +54,7 @@ create table insuranceDetails
 
 ( 
 
-	insurance_id int primary key, 
+	insurance_id int identity(1,1) primary key, 
 
 	user_id int references users(user_id), 
 
@@ -74,7 +74,7 @@ create table contact_details
 
 ( 
 
-	contact_id int primary key, 
+	contact_id int identity(1,1) primary key, 
 
 	user_id int references users(user_id), 
 
@@ -90,7 +90,7 @@ create table doctor_details
 
 ( 
 
-	doctor_id int primary key, 
+	doctor_id int identity(1,1) primary key, 
 
 	address_id int references address(address_id), 
 
@@ -108,7 +108,7 @@ create table working_days
 
 ( 
 
-	days_id int primary key, 
+	days_id int identity(1,1) primary key, 
 
 	monday int, 
 
@@ -130,7 +130,7 @@ create table clinic
 
 ( 
 
-	clinic_id int primary key, 
+	clinic_id int identity(1,1) primary key, 
 
 	doctor_id int references doctor_details(doctor_id), 
 
@@ -150,7 +150,7 @@ create table hospital
 
 ( 
 
-	hospital_id int primary key, 
+	hospital_id int identity(1,1) primary key, 
 
 	hospital_name varchar(50), 
 
@@ -168,7 +168,7 @@ create table labs
 
 ( 
 
-	lab_id int primary key, 
+	lab_id int identity(1,1) primary key, 
 
 	lab_name varchar(25), 
 
@@ -184,7 +184,7 @@ create table lab_testes
 
 ( 
 
-	test_id int primary key, 
+	test_id int identity(1,1) primary key, 
 
 	lab_id int references labs(lab_id), 
 
@@ -200,7 +200,7 @@ create table hospitalDoctors
 
 ( 
 
-	hdoctor_id int primary key, 
+	hdoctor_id int identity(1,1) primary key, 
 
 	hospital_id int references hospital(hospital_id), 
 
@@ -212,7 +212,7 @@ create table workRecord
 
 ( 
 
-	wrecord_id int primary key, 
+	wrecord_id int identity(1,1) primary key, 
 
 	doctor_id int references doctor_details(doctor_id), 
 
@@ -238,7 +238,7 @@ create table blood_bank
 
 ( 
 
-	blood_bank_id int primary key, 
+	blood_bank_id int identity(1,1) primary key, 
 
 	name varchar(50), 
 
@@ -250,7 +250,7 @@ create table blood_availability
 
 ( 
 
-	bavailable_id int primary key, 
+	bavailable_id int identity(1,1) primary key, 
 
 	bloodbank_id int references blood_bank(blood_bank_id), 
 
@@ -264,7 +264,7 @@ create table user_types
 
 ( 
 
-	utype_id int primary key, 
+	utype_id int identity(1,1) primary key, 
 
 	user_type varchar(25) 
 
@@ -288,7 +288,7 @@ create table family_dcotor
 
 ( 
 
-	fdoctor_id int primary key, 
+	fdoctor_id int identity(1,1) primary key, 
 
 	user_id int references users(user_id), 
 
@@ -300,7 +300,7 @@ create table checkup_remainder
 
 ( 
 
-	check_id int primary key, 
+	check_id int identity(1,1) primary key, 
 
 	user_id int references users(user_id), 
 
@@ -320,7 +320,7 @@ create table appointment_details
 
 ( 
 
-	appointment_id int primary key, 
+	appointment_id int identity(1,1) primary key, 
 
 	doctor_id int references doctor_details(doctor_id), 
 
@@ -342,7 +342,7 @@ create table reports
 
 ( 
 
-	report_id int primary key, 
+	report_id int identity(1,1) primary key, 
 
 	user_id int references users(user_id), 
 
@@ -364,7 +364,7 @@ create table appointment_reports
 
 ( 
 
-	app_report_id int primary key, 
+	app_report_id int identity(1,1) primary key, 
 
 	appointment_id int references appointment_details(appointment_id), 
 
@@ -376,7 +376,7 @@ create table permanent_diseases
 
 ( 
 
-	diseases_id int primary key, 
+	diseases_id int identity(1,1) primary key, 
 
 	user_id int references users(user_id), 
 
@@ -392,7 +392,7 @@ create table personal_diseases_reports
 
 ( 
 
-	pd_id int primary key, 
+	pd_id int identity(1,1) primary key, 
 
 	diseases_id int references permanent_diseases(diseases_id), 
 
