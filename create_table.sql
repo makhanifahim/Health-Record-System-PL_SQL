@@ -399,3 +399,4 @@ create table personal_diseases_reports
 	report_id int references reports(report_id) 
 
 ); 
+SFKDFHGJDKFDGFJK
