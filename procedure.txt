@@ -1,0 +1,125 @@
+-- 1 Procedure for Inserting address
+create procedure insert_address
+@state varchar(25),
+@city varchar(25),
+@area varchar(25),
+@nearby varchar(25),
+@pincode varchar(10)
+as
+begin
+	insert into address(state,city,area,nearby,pincode)
+	values(@state,@city,@area,@nearby,@pincode);
+End
+
+
+-- > Use procedure
+insert_address 'goa','vasco','baina','baina beach','403802'
+
+-- 2 Procedure for Inserting labtests
+
+create procedure insert_lab_testes
+@lab_id int,
+@name varchar(50),
+@charges int,
+@description varchar(100)
+as
+begin
+	insert into lab_tests(lab_id,name,charges,description)
+	values(@lab_id,@name,@charges,@description);
+End
+
+-- > Use procedure
+
+insert_lab_testes 1,'blood test',500,'come without having brackfast';
+
+-- 3 Procedure insert_person
+
+create procedure insert_person
+@first_name varchar(25),
+@last_name varchar(25),
+@birthdate date,
+@gender varchar(10),
+@email varchar(50),
+@mobileno varchar(25)
+as
+begin
+	insert into person(first_name,last_name,birthdate,gender,email,mobileno)
+	values(@first_name,@last_name,@birthdate,@gender,@email,@mobileno);
+End
+
+-- > use Procedure
+
+insert_person 'adil','lakhani','1998-05-05','male','adil@gmail.com','7585858584';
+
+-- 4 insert credentials
+
+create procedure insert_user_credentials
+@user_id int,
+@username varchar(20),
+@password varchar(25),
+@utype_id int
+as
+begin
+	insert into credentials(user_id,username,password,utype_id) values(@user_id,@username,@password,@utype_id);
+End;
+
+-- > use Procedure
+
+insert_user_credentials 2,'rikin1','rikin',2;
+
+-- 5 insert users
+create procedure users_insert
+@person_id int,
+@address_id int,
+@has_insurance int
+as
+begin
+	insert into users(person_id,address_id,has_insurance) values(@person_id,@address_id,@has_insurance);
+End;
+
+-- use Procedure 
+
+execute users_insert @p_id,@a_id,@has_ins
+
+
+-- 6 insert all detail about user in one
+
+create procedure insert_user
+@first_name varchar(25),
+@last_name varchar(25),
+@birthdate date,
+@gender varchar(10),
+@email varchar(50),
+@mobileno varchar(25),
+@state varchar(25),
+@city varchar(25),
+@area varchar(25),
+@nearby varchar(25),
+@pincode varchar(10),
+@uname varchar(20),
+@upassword varchar(20),
+@has_ins int,
+@utype int
+as
+begin
+	execute insert_person @first_name,@last_name,@birthdate,@gender,@email,@mobileno
+	declare @p_id int
+	select @p_id = scope_identity()
+	execute insert_address @state,@city,@area,@nearby,@pincode
+	declare @a_id int
+	select @a_id = SCOPE_IDENTITY()
+	execute users_insert @p_id,@a_id,@has_ins
+	declare @u_id int
+	select @u_id = SCOPE_IDENTITY()
+	execute insert_user_credentials @u_id,@uname,@upassword,@utype
+
+End;
+
+
+-- Use Procedure:-
+
+insert_user 'fahim11','makhani11','2020-02-02','male','fahim11@gmail.com','8000319651','gujarat11','surat11','unn11','platinum plaza','394210','faim11','faim11',1,2
+
+-- End ----
+
+ 
