@@ -117,7 +117,7 @@ begin
 			declare @u_id int
 			select @u_id = SCOPE_IDENTITY()
 			execute insert_user_credentials @u_id,@uname,@upassword,@utype
-			select 'success';
+			select 'success new user created';
 		end
 End;
 
