@@ -1,0 +1,14 @@
+-- create function
+create or alter function verify_user(@user_name varchar(20),@user_password varchar(25))
+RETURNS int
+as
+Begin	
+	Declare @return_value int;
+	select @return_value = Count(username) from credentials where username=@user_name and password=@user_password	
+	return @return_value;
+end
+
+
+
+--use function to verify user --
+select  [dbo].verify_user('faim11','faim11');
