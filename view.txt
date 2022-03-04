@@ -1,0 +1,3 @@
+create or alter view add_views
+as
+select p.first_name as uname,p.last_name,c.username,a.area,a.nearby,a.city,a.state,p.first_name as doctorname,p.mobilno as doctormobile from person p,users u,address a,credentials c,doctor_details d where u.person_id=p.person_id and a.adid=u.address_id and c.user_id=u.user_id and d.perosn_id=p.person_id;
