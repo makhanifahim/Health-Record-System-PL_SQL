@@ -83,7 +83,6 @@ execute users_insert @p_id,@a_id,@has_ins
 
 
 -- 6 insert all detail about user in one
-
 create procedure insert_user
 @first_name varchar(25),
 @last_name varchar(25),
@@ -102,17 +101,24 @@ create procedure insert_user
 @utype int
 as
 begin
-	execute insert_person @first_name,@last_name,@birthdate,@gender,@email,@mobileno
-	declare @p_id int
-	select @p_id = scope_identity()
-	execute insert_address @state,@city,@area,@nearby,@pincode
-	declare @a_id int
-	select @a_id = SCOPE_IDENTITY()
-	execute users_insert @p_id,@a_id,@has_ins
-	declare @u_id int
-	select @u_id = SCOPE_IDENTITY()
-	execute insert_user_credentials @u_id,@uname,@upassword,@utype
-
+	if exists(select * from credentials where username=@uname)
+		begin
+			select 'Sorry Username Taken'
+		end
+	else
+		begin
+			execute insert_person @first_name,@last_name,@birthdate,@gender,@email,@mobileno
+			declare @p_id int
+			select @p_id = scope_identity()
+			execute insert_address @state,@city,@area,@nearby,@pincode
+			declare @a_id int
+			select @a_id = SCOPE_IDENTITY()
+			execute users_insert @p_id,@a_id,@has_ins
+			declare @u_id int
+			select @u_id = SCOPE_IDENTITY()
+			execute insert_user_credentials @u_id,@uname,@upassword,@utype
+			select 'success';
+		end
 End;
 
 
